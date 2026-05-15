@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "TabZero",
+  "version": "1.0",
+  "description": "One click. Full client context. Zero tab switching.",
+  "permissions": ["activeTab", "storage", "tabs"],
+  "host_permissions": [
+    "https://api.groq.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  }
+}

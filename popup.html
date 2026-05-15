@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 380px;
+      background: #0A0A0A;
+      font-family: 'DM Sans', sans-serif;
+      color: #F5F0E8;
+    }
+    .header {
+      background: linear-gradient(135deg, #C9A84C, #8A6A28);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0A0A0A;
+    }
+    .tagline {
+      font-size: 10px;
+      color: #0A0A0A;
+      opacity: 0.7;
+    }
+    .timer {
+      background: #0A0A0A;
+      color: #C9A84C;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .search-box {
+      padding: 14px 16px;
+      background: #141414;
+      border-bottom: 1px solid #2A2A2A;
+    }
+    .search-box input {
+      width: 100%;
+      background: #1C1C1C;
+      border: 1px solid #2A2A2A;
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-size: 13px;
+      color: #F5F0E8;
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .search-box input:focus { border-color: #C9A84C; }
+    .search-box input::placeholder { color: #555; }
+    .client-card {
+      margin: 10px 16px;
+      background: #141414;
+      border: 1px solid #2A2A2A;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .client-header {
+      padding: 12px 16px;
+      background: #1C1C1C;
+      border-bottom: 1px solid #2A2A2A;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .client-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #F5F0E8;
+    }
+    .client-tier {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: #C9A84C20;
+      color: #C9A84C;
+      border: 1px solid #C9A84C40;
+      font-weight: 700;
+    }
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-bottom: 1px solid #1C1C1C;
+      font-size: 12px;
+      color: #888;
+    }
+    .info-row span {
+      color: #F5F0E8;
+      font-weight: 600;
+      margin-left: auto;
+      text-align: right;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .green { background: #10b981; }
+    .red { background: #ef4444; }
+    .yellow { background: #f59e0b; }
+    .section-title {
+      font-size: 9px;
+      font-weight: 700;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 10px 16px 4px;
+    }
+    .issue-box {
+      padding: 0 16px 14px;
+    }
+    .issue-box textarea {
+      width: 100%;
+      background: #1C1C1C;
+      border: 1px solid #2A2A2A;
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-size: 12px;
+      color: #F5F0E8;
+      outline: none;
+      resize: none;
+      font-family: 'DM Sans', sans-serif;
+      height: 70px;
+    }
+    .issue-box textarea:focus { border-color: #C9A84C; }
+    .issue-box textarea::placeholder { color: #555; }
+    .analyze-btn {
+      width: 100%;
+      margin-top: 8px;
+      padding: 10px;
+      background: linear-gradient(135deg, #C9A84C, #8A6A28);
+      border: none;
+      border-radius: 10px;
+      color: #0A0A0A;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .analyze-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .ai-response {
+      margin: 0 16px 14px;
+      background: #141414;
+      border: 1px solid #C9A84C40;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .ai-header {
+      padding: 10px 14px;
+      background: #1A1508;
+      border-bottom: 1px solid #C9A84C30;
+      font-size: 10px;
+      font-weight: 700;
+      color: #C9A84C;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ai-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      background: #C9A84C;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .ai-content {
+      padding: 12px 14px;
+      font-size: 11px;
+      color: #aaa;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+    .copy-ai-btn {
+      display: block;
+      width: calc(100% - 28px);
+      margin: 0 14px 12px;
+      padding: 8px;
+      background: #1C1C1C;
+      border: 1px solid #2A2A2A;
+      border-radius: 8px;
+      color: #888;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .copy-ai-btn:hover {
+      border-color: #C9A84C;
+      color: #C9A84C;
+    }
+    .template-btn {
+      display: block;
+      width: calc(100% - 32px);
+      margin: 6px 16px;
+      padding: 9px 14px;
+      background: #1C1C1C;
+      border: 1px solid #2A2A2A;
+      border-radius: 10px;
+      color: #888;
+      font-size: 11px;
+      text-align: left;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.2s;
+    }
+    .template-btn:hover {
+      border-color: #C9A84C;
+      color: #C9A84C;
+      background: #1A1508;
+    }
+    .copied {
+      border-color: #10b981 !important;
+      color: #10b981 !important;
+    }
+    .footer {
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 9px;
+      color: #2A2A2A;
+      border-top: 1px solid #1C1C1C;
+      margin-top: 8px;
+    }
+    .no-client {
+      padding: 40px 20px;
+      text-align: center;
+      color: #555;
+      font-size: 12px;
+    }
+    .no-client p {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #333;
+    }
+    .loading {
+      padding: 20px;
+      text-align: center;
+      color: #C9A84C;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="logo">TabZero</div>
+      <div class="tagline">One click. Full context. Zero switching.</div>
+    </div>
+    <div class="timer" id="timer">00:00</div>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Search client name..."/>
+  </div>
+
+  <div id="content">
+    <div class="no-client">
+      <div style="font-size:28px">🔍</div>
+      <p>Type a client name to load their profile</p>
+    </div>
+  </div>
+
+  <div class="footer">TabZero · Built by Sarmad Safdar</div>
+  <script src="popup.js"></script>
+</body>
+</html>
